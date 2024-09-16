@@ -6,7 +6,7 @@ class Food
 {
 public:
 	Food();
-	void spawnFood(int M, int N, int sizeOfUnit);
+	void spawnFood(int M, int N, int sizeOfUnit, std::vector<Unit*> *body);
 	~Food();
 	int getPosX();
 	int getPosY();

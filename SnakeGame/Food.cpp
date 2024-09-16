@@ -6,10 +6,21 @@ Food::Food() {
 	this->isActive = false;
 }
 
-void Food::spawnFood(int M, int N, int sizeOfUnit)
+void Food::spawnFood(int M, int N, int sizeOfUnit, std::vector<Unit*> *body)
 {
-	this->posX = rand() % M * sizeOfUnit;
-	this->posY = rand() % N * sizeOfUnit;
+	bool isNormalPos = false;
+	while (!isNormalPos) {
+		this->posX = rand() % M * sizeOfUnit;
+		this->posY = rand() % N * sizeOfUnit;
+
+		for (auto unit : *body) {
+			if (this->posX == unit->getPosX() && this->posY == unit->getPosY()) isNormalPos = false;
+			else {
+				isNormalPos = true;
+				break;
+			}
+		}
+	}
 
 	this->foodShape = sf::RectangleShape(sf::Vector2f(32, 32));
 	this->foodShape.setFillColor(sf::Color::Red);

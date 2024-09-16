@@ -12,12 +12,15 @@ int main() {
 	settings.antialiasingLevel = 8.f;
 	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Snake Game", sf::Style::Close, settings);
 
+	// framerate
 	float FPS = 10;
 
+	// game objects
 	Food food;
 	Snake snake(windowWidth / 2, windowHeight / 2);
 
-	sf::Clock fpsClock, foodClock; // timers
+	// timers
+	sf::Clock fpsClock, foodClock;
 
 	while (window.isOpen()) {
 		sf::Event event;
@@ -52,7 +55,7 @@ int main() {
 		for (auto unit : body) window.draw(unit->getShape());
 
 		if (!food.isActive) {
-			food.spawnFood(M, N, sizeOfUnit);
+			food.spawnFood(M, N, sizeOfUnit, &body);
 		}
 
 		window.draw(food.getFoodShape());
