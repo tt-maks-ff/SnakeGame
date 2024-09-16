@@ -9,7 +9,6 @@ public:
 	sf::RectangleShape getShape();
 	int getCurrentDirection();
 	void setDirection(int direction);
-	void addDirection(int direction);
 	int getPosX();
 	int getPosY();
 	void setPosX(int posX);
@@ -24,6 +23,5 @@ private:
 	int currentDirection;
 	Unit* previousUnit;
 	sf::RectangleShape snakeUnit;
-	std::list<int> directions;
-	int number;
+	unsigned int number;
 };

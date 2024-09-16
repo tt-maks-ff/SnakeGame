@@ -4,11 +4,7 @@ Snake::Snake(int posX, int posY) {
 	this->size = 0;
 	this->body.push_back(new Unit(posX, posY, true, &body, 2, size));
 	this->size++;
-
-	for (int i = 0; i < 15; i++) {
-		this->body.push_back(new Unit(0, 0, false, &body, 0, size));
-		this->size++;
-	}
+	this->addUnit();
 }
 
 std::vector<Unit*> Snake::getAllUnits() {
@@ -22,7 +18,7 @@ void Snake::Update() {
 }
 
 void Snake::goTo(int direction) {
-	body.at(0)->addDirection(direction);
+	body.at(0)->setDirection(direction);
 }
 
 int Snake::checkCollision() {
@@ -36,6 +32,19 @@ int Snake::checkCollision() {
 
 int Snake::getCurrentDirection() {
 	return this->body.at(0)->getCurrentDirection();
+}
+
+void Snake::addUnit() {
+	this->body.push_back(new Unit(0, 0, false, &body, 0, size));
+	this->size++;
+}
+
+int Snake::getHeadX() {
+	return this->body.at(0)->getPosX();
+}
+
+int Snake::getHeadY() {
+	return this->body.at(0)->getPosY();
 }
 
 Snake::~Snake() {

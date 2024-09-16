@@ -1,24 +1,20 @@
 #include "Unit.h"
 
 Unit::Unit(int posX = 0, int posY = 0, bool isHead = false, std::vector<Unit*> *body = nullptr, int direction = 0, int number = 0) {
+	this->number = number;
+	
 	if (isHead) {
-		this->number = 0;
 		this->posX = posX;
 		this->posY = posY;
 		this->isHead = isHead;
 		this->currentDirection = direction;
-		this->directions.push_back(this->currentDirection);
 	}
 	else {
-		this->number = number;
 		Unit* previousUnit = body->at(body->size() - 1);
 		this->posX = previousUnit->getPosX();
 		this->posY = previousUnit->getPosY();
 
-		this->directions = previousUnit->directions;
-		this->directions.push_back(previousUnit->directions.back());
-
-		currentDirection = this->directions.front();
+		this->currentDirection = body->at(this->number - 1)->getCurrentDirection();
 
 		switch (currentDirection) {
 		case 1: {
@@ -71,11 +67,6 @@ void Unit::setPosY(int posY) {
 
 void Unit::move(std::vector<Unit*> *body) {
 	if (this->isHead) {
-		if (this->directions.empty()) this->directions.push_back(this->currentDirection);
-
-		this->currentDirection = this->directions.front();
-		this->directions.pop_front();
-
 		switch (this->currentDirection)
 		{
 		case 1: {
@@ -103,10 +94,6 @@ void Unit::move(std::vector<Unit*> *body) {
 	}
 
 	this->snakeUnit.setPosition(this->posX, this->posY);
-}
-
-void Unit::addDirection(int direction) {
-	this->directions.push_back(direction);
 }
 
 bool Unit::isUnitHead() {
