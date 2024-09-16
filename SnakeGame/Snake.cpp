@@ -4,9 +4,7 @@ Snake::Snake(int posX, int posY) {
 	this->size = 0;
 	this->body.push_back(new Unit(posX, posY, true, &body, 2, size));
 	this->size++;
-	for (int i = 0; i < 50; i++) {
-		this->addUnit();
-	}
+	this->addUnit();
 }
 
 std::vector<Unit*> Snake::getAllUnits() {
