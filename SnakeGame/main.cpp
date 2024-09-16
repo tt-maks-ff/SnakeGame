@@ -3,20 +3,21 @@
 #include <iostream>
 
 int main() {
+	// window settings
 	int sizeOfUnit = 32;
 	int M = 30, N = 20;
 	int windowWidth = sizeOfUnit * M, windowHeight = sizeOfUnit * N;
+
+	sf::ContextSettings settings;
+	settings.antialiasingLevel = 8.f;
+	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Snake Game", sf::Style::Close, settings);
 
 	float FPS = 10;
 
 	Food food;
 	Snake snake(windowWidth / 2, windowHeight / 2);
 
-	sf::ContextSettings settings;
-	settings.antialiasingLevel = 8.f;
-	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Snake Game", sf::Style::Close, settings);
-
-	sf::Clock fpsClock, foodClock;
+	sf::Clock fpsClock, foodClock; // timers
 
 	while (window.isOpen()) {
 		sf::Event event;
@@ -47,8 +48,8 @@ int main() {
 			}
 		}
 
-		std::vector<Unit*> units = snake.getAllUnits();
-		for (auto unit : units) window.draw(unit->getShape());
+		std::vector<Unit*> body = snake.getAllUnits();
+		for (auto unit : body) window.draw(unit->getShape());
 
 		if (!food.isActive) {
 			food.spawnFood(M, N, sizeOfUnit);
@@ -61,10 +62,11 @@ int main() {
 		window.clear();
 		
 		if (snake.checkCollision()) return 1;
-		if (food.checkSnakeCollision(&units)) {
+		if (food.checkSnakeCollision(&body)) {
 			food.removeUnit();
 			snake.addUnit();
 		}
+		snake.checkBorders(M, N, sizeOfUnit);
 
 		// fps
 		sf::Int32 frame_duration = fpsClock.getElapsedTime().asMilliseconds();

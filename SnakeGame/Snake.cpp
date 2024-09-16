@@ -47,6 +47,13 @@ int Snake::getHeadY() {
 	return this->body.at(0)->getPosY();
 }
 
+void Snake::checkBorders(int M, int N, int sizeOfUnit) {
+	if (this->body.at(0)->getPosX() < 0) this->body.at(0)->setPosX(M * sizeOfUnit);
+	if (this->body.at(0)->getPosX() > M * sizeOfUnit) this->body.at(0)->setPosX(0);
+	if (this->body.at(0)->getPosY() < 0) this->body.at(0)->setPosY(N * sizeOfUnit);
+	if (this->body.at(0)->getPosY() > N * sizeOfUnit) this->body.at(0)->setPosY(0);
+}
+
 Snake::~Snake() {
 	this->body.clear();
 }

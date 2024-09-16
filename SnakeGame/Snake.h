@@ -14,6 +14,7 @@ public:
 	int checkCollision();
 	int getCurrentDirection();
 	void addUnit();
+	void checkBorders(int M, int N, int sizeOfUnit);
 
 private:
 	int size;

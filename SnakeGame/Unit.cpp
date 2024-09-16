@@ -13,27 +13,6 @@ Unit::Unit(int posX = 0, int posY = 0, bool isHead = false, std::vector<Unit*> *
 		Unit* previousUnit = body->at(body->size() - 1);
 		this->posX = previousUnit->getPosX();
 		this->posY = previousUnit->getPosY();
-
-		this->currentDirection = body->at(this->number - 1)->getCurrentDirection();
-
-		switch (currentDirection) {
-		case 1: {
-			this->posY -= 32;
-			break;
-		}
-		case 2: {
-			this->posX -= 32;
-			break;
-		}
-		case 3: {
-			this->posY += 32;
-			break;
-		}
-		case 4: {
-			this->posX += 32;
-			break;
-		}
-		}
 	}
 
 	this->snakeUnit = sf::RectangleShape(sf::Vector2f(32, 32));
