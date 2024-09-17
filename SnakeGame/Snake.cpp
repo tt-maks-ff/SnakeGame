@@ -12,9 +12,7 @@ std::vector<Unit*>* Snake::getAllUnits() {
 }
 
 void Snake::Update() {
-	for (int i = size - 1; i >= 0; i--) {
-		body.at(i)->move(&body);
-	}
+	for (int i = size - 1; i >= 0; i--) body.at(i)->move(&body);
 }
 
 void Snake::goTo(int direction) {
@@ -23,9 +21,8 @@ void Snake::goTo(int direction) {
 
 int Snake::checkCollision() {
 	for (auto unit : body) {
-		if (!unit->isUnitHead()) {
+		if (!unit->isUnitHead())
 			if (unit->getPosX() == body.at(0)->getPosX() && unit->getPosY() == body.at(0)->getPosY()) return 1;
-		}
 	}
 	return 0;
 }

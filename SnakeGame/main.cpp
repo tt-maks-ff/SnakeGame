@@ -7,11 +7,13 @@ int main() {
 	int sizeOfUnit = 32;
 	int M = 30, N = 20;
 	int windowWidth = sizeOfUnit * M, windowHeight = sizeOfUnit * N;
-	bool isKeysLocked = false;
 
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8.f;
 	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Snake Game", sf::Style::Close, settings);
+
+	// lock keyboard
+	bool isKeysLocked = false;
 
 	// framerate
 	float FPS = 10;
@@ -77,11 +79,6 @@ int main() {
 		isKeysLocked = true;
 		snake.checkBorders(M, N, sizeOfUnit);
 
-		sf::RectangleShape shape;
-		shape.setSize(sf::Vector2f(32, 32));
-		shape.setFillColor(sf::Color::Yellow);
-		shape.setPosition(0, 220);
-		window.draw(shape);
 		// fps
 		sf::Int32 frame_duration = fpsClock.getElapsedTime().asMilliseconds();
 		sf::Int32 time_to_sleep = int(1000.f / FPS) - frame_duration;
