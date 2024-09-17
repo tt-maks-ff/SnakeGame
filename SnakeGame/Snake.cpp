@@ -4,13 +4,11 @@ Snake::Snake(int posX, int posY) {
 	this->size = 0;
 	this->body.push_back(new Unit(posX, posY, true, &body, 2, size));
 	this->size++;
-	for (int i = 0; i < 50; i++) {
-		this->addUnit();
-	}
+	this->addUnit();
 }
 
-std::vector<Unit*> Snake::getAllUnits() {
-	return this->body;
+std::vector<Unit*>* Snake::getAllUnits() {
+	return &(this->body);
 }
 
 void Snake::Update() {
@@ -50,10 +48,22 @@ int Snake::getHeadY() {
 }
 
 void Snake::checkBorders(int M, int N, int sizeOfUnit) {
-	if (this->body.at(0)->getPosX() < 0) this->body.at(0)->setPosX(M * sizeOfUnit);
-	if (this->body.at(0)->getPosX() > M * sizeOfUnit) this->body.at(0)->setPosX(0);
-	if (this->body.at(0)->getPosY() < 0) this->body.at(0)->setPosY(N * sizeOfUnit);
-	if (this->body.at(0)->getPosY() > N * sizeOfUnit) this->body.at(0)->setPosY(0);
+	if (this->body.at(0)->getPosX() < 0) {
+		this->body.at(0)->setPosX(M * sizeOfUnit - sizeOfUnit);
+		this->body.at(0)->setDirection(4);
+	}
+	if (this->body.at(0)->getPosX() > M * sizeOfUnit - sizeOfUnit) {
+		this->body.at(0)->setPosX(0);
+		this->body.at(0)->setDirection(2);
+	}
+	if (this->body.at(0)->getPosY() < 0) {
+		this->body.at(0)->setPosY(N * sizeOfUnit - sizeOfUnit);
+		this->body.at(0)->setDirection(1);
+	}
+	if (this->body.at(0)->getPosY() > N * sizeOfUnit - sizeOfUnit) {
+		this->body.at(0)->setPosY(0);
+		this->body.at(0)->setDirection(3);
+	}
 }
 
 Snake::~Snake() {

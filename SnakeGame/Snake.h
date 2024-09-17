@@ -6,7 +6,7 @@ class Snake {
 public:
 	Snake(int posX, int posY);
 	~Snake();
-	std::vector<Unit*> getAllUnits();
+	std::vector<Unit*>* getAllUnits();
 	int getHeadX();
 	int getHeadY();
 	void Update();
